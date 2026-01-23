@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <div id="app">
+    <h1>다양한 전시 정보</h1>
+    <hr>
+    <ul>
+      <template v-for="(exhibition,idx) in infoArr" :key="idx">
+      <li>
+        <h3>{{Object.keys(exhibition)[0]}} </h3>
+        <p>{{exhibition[Object.keys(exhibition)[0]].place}}</p>
+        <p>가격 : {{exhibition[Object.keys(exhibition)[0]].price}}</p>
+        <hr>
+      </li>
+      </template>
+    </ul>
+  </div>
+
+  <script>
+    const {createApp} = Vue
+
+    const app = createApp({
+      setup(){
+        const infoArr = [
+          {'무라카미 다카시: 무라카시좀비':{place: '부산 시립 미술관', price: 1000}},
+          {'마우라치오 카텔란 개인전':{place: '리움 미술관', price: 30000}},
+          {'조선백자전':{place: '리움 미술관', price: 30000}},
+          {'한국 실험미술 1960 - 1970':{place: '국립현대미술관', price: 0}},
+          {'에드워드 호퍼 : 길 위에서':{place: '서울 시립 미술관', price: 1000}},
+          {'알렉산더 칼더 x 이우환':{place: '국제갤러리 서울점', price: 15000}},
+        ]
+
+        return {infoArr}
+
+      }
+
+    })
+    app.mount('#app')
+
+
+
+
+  </script>
+</body>
+</html>
