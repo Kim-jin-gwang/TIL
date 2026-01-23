@@ -1,5 +1,4 @@
 <!-- MyComponent.vue -->
-
 <template>
   <div class="greeting">{{ msg }}</div>
 </template>

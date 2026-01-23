@@ -23,6 +23,10 @@
       setup() {
         const message = ref('Hello vue!')
         const count = ref(0)
+        const numbers = ref([1, 2, 3, 4, 5])
+        numbers.value.forEach(n => {
+          console.log(n)
+        })
 
         return {
           message,
