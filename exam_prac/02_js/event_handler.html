@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .font-crimson {
+      color: crimson;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="heading">Hover me!</h1>
+  <h2 class="sub-heading">Double Click me!</h2>
+  <p class="contents">Lorem ipsum dolor sit amet consectetur</p>
+
+  <script>
+    const randomTexts = [
+      'Lorem ipsum dolor sit amet consectetu',
+      'adipisicing elit. Repellendus delectus quam',
+      'similique quo ipsam maxime totam alias',
+      'quibusdam repudiandae voluptas dicta',
+      'voluptas voluptatibus exercitationem officiis'
+    ]
+
+    // 아래에 코드 작성
+    const hover = document.querySelector('.heading')
+    const dbClick = document.querySelector('.sub-heading')
+    const Scroll = document.querySelector('.contents')
+
+    const changeTxt = 'I am being hovered!'
+    const originalTxt = hover.textContent
+    
+
+    hover.addEventListener('mouseover',function(){
+      hover.textContent = changeTxt
+    })
+
+    hover.addEventListener('mouseout',function(){
+      hover.textContent = originalTxt
+    })
+
+    dbClick.addEventListener('dblclick',function(){
+      dbClick.classList.toggle('font-crimson')
+    })
+
+    Scroll.addEventListener('wheel',function(){
+      const randomIdx = Math.floor(Math.random() * randomTexts.length)
+      Scroll.textContent = randomTexts[randomIdx]
+    })
+
+
+  </script>
+</body>
+
+</html>

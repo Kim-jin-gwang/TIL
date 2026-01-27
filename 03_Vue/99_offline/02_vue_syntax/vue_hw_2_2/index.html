@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{ isLogin }}</p>
+    <h1>조건문 연습하기</h1>
+    <!-- <button v-on:click="isToggle">Login/Logout</button> -->
+    <button v-on:click="isLogin = !isLogin">Login/Logout</button>
+    <ul v-if="isLogin">
+      <li>유저네임: {{ user.userName }}</li>
+      <li>관리자여부: {{ user.isAdmin }}</li>
+      <li>비밀번호: {{ user.passWord }}</li>
+    </ul>
+ </div> 
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // const app1 = vue.createApp({})
+    // const app2 = vue.createApp({})
+    // const app3 = vue.createApp({})
+    // const app4 = vue.createApp({})
+    const { createApp, ref } = Vue
+    console.log(createApp, ref)
+    const app = createApp({
+      setup() {
+        // const -> 상수: 재할당/재선언 불가능
+        // 지금 필요한건, 사용자와의 상호작용으로 언제든 변할수 있는 어떤 Boolean
+        // vue객체가 가지고 있는 ref 메서드 가져와서 사용하기
+        const isLogin = ref(false)
+        // const isToggle = function () {
+        //   console.log('왜 안되니?')
+        //   // isLogin 값이 원래 가지고 있던 값이 안되게 한다.
+        //   if (isLogin.value === false) {
+        //     // false인 상황에서 toggle 버튼 클릭되었으니까 true 할당
+        //     isLogin.valule = true
+        //   } else {
+        //     isLogin.valule = false
+        //   }
+        // }
+
+        const user = ref({
+          userName: 'admin',
+          isAdmin: true,
+          passWord: '1q2w3e4r'
+        })
+
+
+
+        // setup 함수의 역할 -> 사용할 변수, 함수 등을 정의하고 반환하는것
+        // 따라서, return 값에 내가 정의한 사용할 모든 속성, 함수를 객체 형태로 반환
+          // 왜 객체 형태로 반환인가? -> 함수의 반환값은 오직 1개의 값만을 가진다.
+        return {
+          // isLogin: ref(true)
+          // isLogin: isLogin
+          isLogin, user
+          // isToggle,
+        }
+      }
+    })
+    
+    app.mount('#app')
+    // const ref = vue.ref
+    // const computed = vue.computed
+    
+    
+    /*
+      - Vue3 CDN을 사용한다.
+      1. 새로운 app instance를 생성하여 아이디가 app인 container에 mount 하시오.
+      2. 로그인 여부를 판별할 변수 isLogin을 작성한다.
+      3. `Login/Logout` 버튼을 클릭하면 isLogin에 할당된 값이 이전 값의 부정형이 되도록 하는 메서드가 실행되도록 한다.
+        - isLogin의 값이 true일때, 버튼이 클릭되면 false가 할당되어야 한다. false인 경우에는 true가 할당되어야 한다.
+      4. isLogin 정보가 true일 때만, user 정보가 화면에 렌덩링 될 수 있도록 한다.
+        - user 정보 객체는 다음의 속성들을 가진다.
+        - userName : `admin`
+        - isAdmin : true
+        - passWord : `1q2w3e4r`
+    */
+  </script>
+</body>
+</html>
