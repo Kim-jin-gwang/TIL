@@ -1,0 +1,8 @@
+name: credit_fraud_project
+# conda_env: conda.yaml
+entry_points:
+  main:
+    parameters:
+      max_iter: {type: int, default: 1000}
+      n_estimators: {type: int, default: 100}
+    command: "python main.py --max_iter {max_iter} --n_estimators {n_estimators}"
