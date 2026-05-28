@@ -1,0 +1,35 @@
+FROM apache/spark:3.5.4-java17-python3
+
+USER root
+
+# python3 위치 확인 후 심볼릭 링크
+RUN ln -sf $(which python3) /usr/bin/python
+
+# pandas 설치
+RUN python3 -m pip install --no-cache-dir --upgrade pip && \
+    python3 -m pip install --no-cache-dir pandas==2.2.3
+
+# 한국어 폰트 설치
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fonts-nanum \
+    fontconfig \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN fc-cache -fv
+
+# Spark 기본 UID/GID를 Airflow/Host와 맞춤
+RUN groupmod -g 1001 spark && \
+    usermod -u 1000 spark
+
+# Spark 로그, 워크 디렉터리, Ivy 캐시 디렉터리 생성 및 권한 설정
+RUN mkdir -p \
+    /opt/spark/logs \
+    /opt/spark/work \
+    /home/spark/.ivy2/cache \
+    /home/spark/.ivy2/jars && \
+    chown -R 1000:1001 \
+    /opt/spark \
+    /home/spark
+
+
+USER spark
