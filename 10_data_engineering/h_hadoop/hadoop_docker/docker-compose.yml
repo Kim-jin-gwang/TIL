@@ -1,0 +1,35 @@
+services:
+  namenode:
+    build: .
+    container_name: namenode
+    hostname: namenode
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+      - "8088:8088"
+    volumes:
+      - ./files:/workspace
+    networks:
+      - shared-net
+
+  datanode1:
+    build: .
+    container_name: datanode1
+    hostname: datanode1
+    ports:
+      - "9864:9864"
+    networks:
+      - shared-net
+
+  datanode2:
+    build: .
+    container_name: datanode2
+    hostname: datanode2
+    ports:
+      - "9865:9864"
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    external: true
